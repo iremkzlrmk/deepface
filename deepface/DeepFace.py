@@ -191,8 +191,6 @@ def extract_faces(
 # ---------------------------
 # main
 
-functions.initialize_folder()
-
 
 def cli():
     """
