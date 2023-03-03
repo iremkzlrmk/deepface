@@ -62,14 +62,6 @@ def loadModel(
 
     # ----------------------------
 
-    home = functions.get_deepface_home()
-
-    if os.path.isfile(home + "/.deepface/weights/facial_expression_model_weights.h5") != True:
-        print("facial_expression_model_weights.h5 will be downloaded...")
-
-        output = home + "/.deepface/weights/facial_expression_model_weights.h5"
-        gdown.download(url, output, quiet=False)
-
-    model.load_weights(home + "/.deepface/weights/facial_expression_model_weights.h5")
+    model.load_weights("/content/deepface/deepface/weights/facial_expression_model_weights.h5")
 
     return model

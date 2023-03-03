@@ -91,16 +91,7 @@ def loadModel(
 
     # -----------------------------------
 
-    home = functions.get_deepface_home()
-    output = home + "/.deepface/weights/vgg_face_weights.h5"
-
-    if os.path.isfile(output) != True:
-        print("vgg_face_weights.h5 will be downloaded...")
-        gdown.download(url, output, quiet=False)
-
-    # -----------------------------------
-
-    model.load_weights(output)
+    model.load_weights("/content/deepface/deepface/weights/vgg_face_weights.h5")
 
     # -----------------------------------
 

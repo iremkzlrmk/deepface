@@ -45,14 +45,6 @@ def loadModel(
 
     # load weights
 
-    home = functions.get_deepface_home()
-
-    if os.path.isfile(home + "/.deepface/weights/gender_model_weights.h5") != True:
-        print("gender_model_weights.h5 will be downloaded...")
-
-        output = home + "/.deepface/weights/gender_model_weights.h5"
-        gdown.download(url, output, quiet=False)
-
-    gender_model.load_weights(home + "/.deepface/weights/gender_model_weights.h5")
+    gender_model.load_weights("/content/deepface/deepface/weights/gender_model_weights.h5")
 
     return gender_model

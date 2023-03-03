@@ -42,15 +42,7 @@ def loadModel(
 
     # load weights
 
-    home = functions.get_deepface_home()
-
-    if os.path.isfile(home + "/.deepface/weights/age_model_weights.h5") != True:
-        print("age_model_weights.h5 will be downloaded...")
-
-        output = home + "/.deepface/weights/age_model_weights.h5"
-        gdown.download(url, output, quiet=False)
-
-    age_model.load_weights(home + "/.deepface/weights/age_model_weights.h5")
+    age_model.load_weights("/content/deepface/deepface/weights/age_model_weights.h5")
 
     return age_model
 
