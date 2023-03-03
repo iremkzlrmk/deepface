@@ -1,9 +1,6 @@
-import os
-import gdown
 import numpy as np
 import tensorflow as tf
 from deepface.basemodels import VGGFace
-from deepface.commons import functions
 
 # ----------------------------------------
 # dependency configurations
@@ -20,9 +17,7 @@ elif tf_version == 2:
 # ----------------------------------------
 
 
-def loadModel(
-    url="https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5",
-):
+def loadModel():
 
     model = VGGFace.baseModel()
 

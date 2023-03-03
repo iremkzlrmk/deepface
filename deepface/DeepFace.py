@@ -61,62 +61,6 @@ def analyze(
     silent=False,
 ):
 
-    """
-    This function analyzes facial attributes including age, gender, emotion and race.
-    In the background, analysis function builds convolutional neural network models to
-    classify age, gender, emotion and race of the input image.
-
-    Parameters:
-            img_path: exact image path, numpy array (BGR) or base64 encoded image could be passed.
-            If source image has more than one face, then result will be size of number of faces
-            appearing in the image.
-
-            actions (tuple): The default is ('age', 'gender', 'emotion', 'race'). You can drop
-            some of those attributes.
-
-            enforce_detection (bool): The function throws exception if no face detected by default.
-            Set this to False if you don't want to get exception. This might be convenient for low
-            resolution images.
-
-            detector_backend (string): set face detector backend to opencv, retinaface, mtcnn, ssd,
-            dlib or mediapipe.
-
-            silent (boolean): disable (some) log messages
-
-    Returns:
-            The function returns a list of dictionaries for each face appearing in the image.
-
-            [
-                    {
-                            "region": {'x': 230, 'y': 120, 'w': 36, 'h': 45},
-                            "age": 28.66,
-                            "dominant_gender": "Woman",
-                            "gender": {
-                                    'Woman': 99.99407529830933,
-                                    'Man': 0.005928758764639497,
-                            }
-                            "dominant_emotion": "neutral",
-                            "emotion": {
-                                    'sad': 37.65260875225067,
-                                    'angry': 0.15512987738475204,
-                                    'surprise': 0.0022171278033056296,
-                                    'fear': 1.2489334680140018,
-                                    'happy': 4.609785228967667,
-                                    'disgust': 9.698561953541684e-07,
-                                    'neutral': 56.33133053779602
-                            }
-                            "dominant_race": "white",
-                            "race": {
-                                    'indian': 0.5480832420289516,
-                                    'asian': 0.7830780930817127,
-                                    'latino hispanic': 2.0677512511610985,
-                                    'black': 0.06337375962175429,
-                                    'middle eastern': 3.088453598320484,
-                                    'white': 93.44925880432129
-                            }
-                    }
-            ]
-    """
     # ---------------------------------
     # validate actions
     if isinstance(actions, str):
@@ -218,35 +162,6 @@ def extract_faces(
     align=True,
     grayscale=False,
 ):
-
-    """
-    This function applies pre-processing stages of a face recognition pipeline
-    including detection and alignment
-
-    Parameters:
-            img_path: exact image path, numpy array (BGR) or base64 encoded image.
-            Source image can have many face. Then, result will be the size of number
-            of faces appearing in that source image.
-
-            target_size (tuple): final shape of facial image. black pixels will be
-            added to resize the image.
-
-            detector_backend (string): face detection backends are retinaface, mtcnn,
-            opencv, ssd or dlib
-
-            enforce_detection (boolean): function throws exception if face cannot be
-            detected in the fed image. Set this to False if you do not want to get
-            an exception and run the function anyway.
-
-            align (boolean): alignment according to the eye positions.
-
-            grayscale (boolean): extracting faces in rgb or gray scale
-
-    Returns:
-            list of dictionaries. Each dictionary will have facial image itself,
-            extracted area from the original image and confidence score.
-
-    """
 
     resp_objs = []
     img_objs = functions.extract_faces(
