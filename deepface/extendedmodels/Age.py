@@ -1,27 +1,13 @@
 import numpy as np
-import tensorflow as tf
+
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Convolution2D, Flatten, Activation
 from deepface.basemodels import VGGFace
-
-# ----------------------------------------
-# dependency configurations
-
-tf_version = int(tf.__version__.split(".", maxsplit=1)[0])
-
-if tf_version == 1:
-    from keras.models import Model, Sequential
-    from keras.layers import Convolution2D, Flatten, Activation
-elif tf_version == 2:
-    from tensorflow.keras.models import Model, Sequential
-    from tensorflow.keras.layers import Convolution2D, Flatten, Activation
-
-# ----------------------------------------
 
 
 def loadModel():
 
     model = VGGFace.baseModel()
-
-    # --------------------------
 
     classes = 101
     base_model_output = Sequential()
@@ -29,19 +15,10 @@ def loadModel():
     base_model_output = Flatten()(base_model_output)
     base_model_output = Activation("softmax")(base_model_output)
 
-    # --------------------------
-
     age_model = Model(inputs=model.input, outputs=base_model_output)
-
-    # --------------------------
-
-    # load weights
-
-    age_model.load_weights("/content/deepface/deepface/weights/age_model_weights.h5")
+    age_model.load_weights("deepface/weights/age_model_weights.h5")
 
     return age_model
-
-    # --------------------------
 
 
 def findApparentAge(age_predictions):

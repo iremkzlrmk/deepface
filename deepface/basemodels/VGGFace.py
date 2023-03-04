@@ -1,34 +1,5 @@
-import os
-import gdown
-import tensorflow as tf
-from deepface.commons import functions
-
-# ---------------------------------------
-
-tf_version = int(tf.__version__.split(".", maxsplit=1)[0])
-
-if tf_version == 1:
-    from keras.models import Model, Sequential
-    from keras.layers import (
-        Convolution2D,
-        ZeroPadding2D,
-        MaxPooling2D,
-        Flatten,
-        Dropout,
-        Activation,
-    )
-else:
-    from tensorflow.keras.models import Model, Sequential
-    from tensorflow.keras.layers import (
-        Convolution2D,
-        ZeroPadding2D,
-        MaxPooling2D,
-        Flatten,
-        Dropout,
-        Activation,
-    )
-
-# ---------------------------------------
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Convolution2D, ZeroPadding2D, MaxPooling2D, Flatten, Dropout, Activation
 
 
 def baseModel():
@@ -80,22 +51,12 @@ def baseModel():
     return model
 
 
-# url = 'https://drive.google.com/uc?id=1CPSeum3HpopfomUEK1gybeuIVoeJT_Eo'
-
-
 def loadModel(
     url="https://github.com/serengil/deepface_models/releases/download/v1.0/vgg_face_weights.h5",
 ):
 
     model = baseModel()
-
-    # -----------------------------------
-
-    model.load_weights("/content/deepface/deepface/weights/vgg_face_weights.h5")
-
-    # -----------------------------------
-
-    # TO-DO: why?
+    model.load_weights("deepface/weights/vgg_face_weights.h5")
     vgg_face_descriptor = Model(inputs=model.layers[0].input, outputs=model.layers[-2].output)
 
     return vgg_face_descriptor

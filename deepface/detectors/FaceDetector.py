@@ -1,10 +1,8 @@
 import math
 from PIL import Image
 import numpy as np
-from deepface.commons import distance
-from deepface.detectors import (
-    OpenCvWrapper
-)
+from deepface.commons import functions
+from deepface.detectors import OpenCvWrapper
 
 
 def build_model(detector_backend):
@@ -80,9 +78,9 @@ def alignment_procedure(img, left_eye, right_eye):
     # -----------------------
     # find length of triangle edges
 
-    a = distance.findEuclideanDistance(np.array(left_eye), np.array(point_3rd))
-    b = distance.findEuclideanDistance(np.array(right_eye), np.array(point_3rd))
-    c = distance.findEuclideanDistance(np.array(right_eye), np.array(left_eye))
+    a = functions.findEuclideanDistance(np.array(left_eye), np.array(point_3rd))
+    b = functions.findEuclideanDistance(np.array(right_eye), np.array(point_3rd))
+    c = functions.findEuclideanDistance(np.array(right_eye), np.array(left_eye))
 
     # -----------------------
 

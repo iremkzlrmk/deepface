@@ -3,29 +3,12 @@ import base64
 from PIL import Image
 import requests
 
-# 3rd party dependencies
 import numpy as np
 import cv2
-import tensorflow as tf
 
-# package dependencies
 from deepface.detectors import FaceDetector
 
-
-# --------------------------------------------------
-# configurations of dependencies
-
-tf_version = tf.__version__
-tf_major_version = int(tf_version.split(".", maxsplit=1)[0])
-tf_minor_version = int(tf_version.split(".")[1])
-
-if tf_major_version == 1:
-    from keras.preprocessing import image
-elif tf_major_version == 2:
-    from tensorflow.keras.preprocessing import image
-
-
-# --------------------------------------------------
+from tensorflow.keras.preprocessing import image
 
 
 def loadBase64Img(uri):
@@ -59,7 +42,19 @@ def load_image(img):
     return cv2.imread(img)
 
 
-# --------------------------------------------------
+def findEuclideanDistance(source_representation, test_representation):
+
+    if isinstance(source_representation, list):
+        source_representation = np.array(source_representation)
+
+    if isinstance(test_representation, list):
+        test_representation = np.array(test_representation)
+
+    euclidean_distance = source_representation - test_representation
+    euclidean_distance = np.sum(np.multiply(euclidean_distance, euclidean_distance))
+    euclidean_distance = np.sqrt(euclidean_distance)
+
+    return euclidean_distance
 
 
 def extract_faces(
